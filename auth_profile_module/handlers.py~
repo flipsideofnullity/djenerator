@@ -1,0 +1,14 @@
+from actstream import action
+from statistics.models import UserStatistics
+
+JOIN_BONUS = 100
+
+def profile_handler(sender, instance, created, **kwargs):
+    if created:
+        action.send(instance.owner_, verb="joined Kothay ", point=JOIN_BONUS)
+        UserStatistics.populate_user_statistics(user_list=[instance.owner_])
+    else:
+        gender = "her" if instance.owner_.get_profile().gender == "2" else "his"
+        action.send(instance.owner_,
+            verb="updated {} profile ".format(gender),
+            point=0)

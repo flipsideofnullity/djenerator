@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+    {% if messages %}
+            <div class="span12">
+            {% block flash_messages %}
+                {% for message in messages %}
+                <div class="alert {% if message.tags == "error" %}alert-danger{% else %}alert-success{% endif %} alert-block">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endblock %}
+            </div>
+    {% endif %}
+</div>
+<div class="row"><div class="span12">{% block breadcrumbs %}{% endblock %}</div></div>
+<div class="row">
+    <div class="span3">
+    {% block sidebar %}
+    {% endblock sidebar %}
+    </div>
+    <div class="span9">
+    {% block content_title %}
+    {% endblock %}
+    {% block content %}    
+    {% endblock content %}        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load bootstrap_tags %}
+{% templatetag openblock %} extends "{{app_name}}/{{app_name}}_base.html" {% templatetag closeblock %}
+{% templatetag openblock %} load i18n bootstrap_tags {% templatetag closeblock %}
+{% templatetag openblock %} load url from future {% templatetag closeblock %}
+{% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">{{app_name|make_humanized}}</a> <span class="divider">/</span></li>
+  <li><a href="{% templatetag openvariable %} object.get_list_url {% templatetag closevariable %}">{{model_name|make_humanized}}</a> <span class="divider">/</span></li>
+  <li class="active">{% templatetag openvariable %} object {% templatetag closevariable %}</li>
+</ul>
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block content {% templatetag closeblock %}
+
+<table class="table table-striped table-condensed">
+        <tr><th colspan=2>Detail for {% templatetag openvariable %} object {% templatetag closevariable %}</th></tr>
+            {% for attr in attr_list %}
+        <tr>            
+                <th>{{ attr|make_humanized }}</th>
+                <td>{% templatetag openvariable %} object.{{attr}} {% templatetag closevariable %}</td>
+                    </tr>
+            {% endfor %}
+        <tr>
+            <td colspan="2">
+<a href="{% templatetag openvariable %} object.get_list_url {% templatetag closevariable %}" 
+    class="btn btn-primary">
+        <i class="icon-list"></i> {% templatetag openblock %} trans "List" {% templatetag closeblock %}
+</a>  
+<a href="{% templatetag openvariable %} object.get_update_url {% templatetag closevariable %}" 
+    class="btn btn-success">
+        <i class="icon-pencil"></i> {% templatetag openblock %} trans "Update" {% templatetag closeblock %}
+</a> 
+<a href="{% templatetag openvariable %} object.get_delete_url {% templatetag closevariable %}" 
+    class="btn btn-danger">
+        <i class="icon-trash"></i> {% templatetag openblock %} trans "Delete" {% templatetag closeblock %}
+</a>
+                </td>
+            </tr>                        
+</table>
+{% templatetag openblock %} endblock {% templatetag closeblock %}

@@ -1,0 +1,42 @@
+{% load bootstrap_tags %}
+{% templatetag openblock %} extends "{{app_name}}/{{app_name}}_base.html" {% templatetag closeblock %}
+{% templatetag openblock %} load i18n bootstrap_tags {% templatetag closeblock %}
+{% templatetag openblock %} load url from future {% templatetag closeblock %}
+{% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% templatetag openblock %}url '{{app_name}}-base'{% templatetag closeblock %}">{{app_name|make_humanized}}</a> <span class="divider">/</span></li>
+  <li><a href="{% templatetag openblock %}url '{{model_name}}-list'{% templatetag closeblock %}">{{model_name|make_humanized}}</a><span class="divider">/</span></li> 
+ {% templatetag openblock %} if object {% templatetag closeblock %}  
+  <li><a href="{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}">
+  {% templatetag openvariable %} object {% templatetag closevariable %}</a><span class="divider">/</span></li>
+  <li class="active">Update</li>
+  {% templatetag openblock %} else {% templatetag closeblock %}  
+  <li class="active">Create</li>  
+  {% templatetag openblock %} endif {% templatetag closeblock %}  
+</ul>
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block content {% templatetag closeblock %}
+<div class="well">
+<form action="" method="POST" enctype="multipart/form-data">
+<fieldset>
+    <legend>
+ {% templatetag openblock %} if object {% templatetag closeblock %}  
+  {% templatetag openvariable %} object {% templatetag closevariable %} Edit
+  {% templatetag openblock %} else {% templatetag closeblock %}  
+  Create
+  {% templatetag openblock %} endif {% templatetag closeblock %}   
+    </legend>
+{% templatetag openblock %} csrf_token {% templatetag closeblock %}
+{% templatetag openvariable %}form|as_bootstrap{% templatetag closevariable %}
+<button type="submit" class="btn btn-primary">
+    {% templatetag openblock %} if not object {% templatetag closeblock %}
+        <i class="icon-hdd"></i> {% templatetag openblock %} trans "Save" {% templatetag closeblock %}
+    {% templatetag openblock %} else {% templatetag closeblock %}
+        <i class="icon-pencil"></i> {% templatetag openblock %} trans "Update" {% templatetag closeblock %}    
+    {% templatetag openblock %} endif {% templatetag closeblock %}
+</button>
+</fieldset>
+</form>
+</div>
+{% templatetag openblock %} endblock {% templatetag closeblock %}

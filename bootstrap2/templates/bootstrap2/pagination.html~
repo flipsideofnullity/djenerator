@@ -1,0 +1,40 @@
+{% load bootstrap_tags i18n %}
+{% if is_paginated %}
+<div class="pagination pagination-centered">
+    <ul>
+        {% if page_obj.has_previous %}
+            <li>
+                {% if query_string %}
+                    <a href="?{{query_string}}&page={{ page_obj.previous_page_number }}">{% icon "arrow-left" %} previous</a>
+                {% else %}
+                    <a href="?page={{ page_obj.previous_page_number }}">{% icon "arrow-left" %} previous</a>
+                {% endif %}
+            </li>
+        {% endif %}
+            <li>
+                <a href="?{{query_string}}&page=1">
+                    First
+                </a>            
+            </li>    
+        
+            <li class="active">
+                <a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}
+                </a>
+            </li>
+            <li>
+                <a href="?{{query_string}}&page={{ paginator.num_pages }}">
+                    Last
+                </a>        
+            </li>            
+        {% if page_obj.has_next %}
+            <li>
+                {% if query_string %}
+                    <a href="?{{query_string}}&page={{ page_obj.next_page_number }}">{% icon "arrow-right" %} next</a>
+                {% else %}
+                    <a href="?page={{ page_obj.next_page_number }}">next {% icon "arrow-right" %}</a>
+                {% endif %}
+            </li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}

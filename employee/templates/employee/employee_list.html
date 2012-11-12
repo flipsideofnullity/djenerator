@@ -1,0 +1,78 @@
+
+{% extends "employee/employee_base.html" %}
+{% load i18n bootstrap_tags %}
+{% load url from future %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li><a href="{%url 'employee-base'%}">Employee</a> <span class="divider">/</span></li>
+  <li class="active">Employee</li>
+</ul>
+{% endblock %}
+{% block content %}
+<h3>List of employee</h3>
+<div class="">
+<form class="form-search pull-right" action="" method="GET">
+  <input name="q" id="id_q" type="text" class="input-medium search-query">
+  <button type="submit" class="btn btn-primary"><i class="icon-search"></i> Search</button>
+  <a href="{% url 'employee-create' %}" class="btn btn-success"><i class="icon-plus"></i> Add</a>
+</form>
+<div class="clearfix"></div>
+</div>
+{% if object_list %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            
+            <th>
+                <a href="?sort=asc&sortby=department"><i class="icon-chevron-up"></i></a>            
+                Department
+                <a href="?sort=desc&sortby=department"><i class="icon-chevron-down"></i></a>                
+            </th>
+            
+            <th>
+                <a href="?sort=asc&sortby=remarks"><i class="icon-chevron-up"></i></a>            
+                Remarks
+                <a href="?sort=desc&sortby=remarks"><i class="icon-chevron-down"></i></a>                
+            </th>
+            
+            <th>
+                <a href="?sort=asc&sortby=name"><i class="icon-chevron-up"></i></a>            
+                Name
+                <a href="?sort=desc&sortby=name"><i class="icon-chevron-down"></i></a>                
+            </th>
+            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.department }}</td>
+                <td>{{ obj.remarks }}</td>
+                <td>{{ obj.name }}</td>
+                
+                <td>
+<a href="{{ obj.get_absolute_url }}" 
+    class=""><i class="icon-eye-open"></i> 
+        {% trans "View" %}
+</a> &nbsp; 
+<a href="{{ obj.get_update_url }}" 
+    class=""><i class="icon-pencil"></i> 
+        {% trans "Update" %}
+</a> &nbsp; 
+<a href="{{ obj.get_delete_url }}" 
+    class=""><i class="icon-trash"></i> 
+        {% trans "Delete" %}
+</a>
+                </td>
+            </tr>                        
+        {% endfor %}        
+    </tbody>
+</table>
+{% else %}
+<div class="well">
+No object is found. Would you like to <a href="{%url 'employee-create'%}">create</a> one???
+</div>
+{% endif %}
+{% endblock %}

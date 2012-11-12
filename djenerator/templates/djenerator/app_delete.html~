@@ -1,0 +1,31 @@
+{% load bootstrap_tags %}
+{% templatetag openblock %} extends "{{app_name}}/{{app_name}}_base.html" {% templatetag closeblock %}
+{% templatetag openblock %} load i18n bootstrap_tags {% templatetag closeblock %}
+{% templatetag openblock %} load url from future {% templatetag closeblock %}
+{% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>  
+
+  <li><a href="#">{{app_name|make_humanized}}</a><span class="divider">/</span></li>
+  <li><a href="{% templatetag openblock %}url '{{model_name}}-list'{% templatetag closeblock %}">{{model_name|make_humanized}}</a> <span class="divider">/</span></li>
+  <li><a href="{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}">
+  {% templatetag openvariable %} object {% templatetag closevariable %}</a><span class="divider">/</span></li>
+  <li class="active">Delete</li>
+</ul>
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block content {% templatetag closeblock %}
+<div class="well">
+<form action="" method="POST">{% templatetag openblock %} csrf_token {% templatetag closeblock %}
+<p>
+Are you sure you want to delete the {% templatetag openvariable %}object{% templatetag closevariable %}?
+</p>
+<button type="submit" class="btn btn-danger">
+    <i class="icon-trash"></i> {% templatetag openblock %} trans "Yes, I am sure!" {% templatetag closeblock %}
+</button>
+<a href="{% templatetag openvariable %} object.get_list_url {% templatetag closevariable %}" 
+    class="btn btn-primary">
+        <i class="icon-chevron-left"></i> {% templatetag openblock %} trans "No, Take me back!" {% templatetag closeblock %}
+</a>
+</form>
+</well>
+{% templatetag openblock %} endblock {% templatetag closeblock %}

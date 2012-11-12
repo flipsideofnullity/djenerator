@@ -1,0 +1,64 @@
+{% load bootstrap_tags %}
+{% templatetag openblock %} extends "{{app_name}}/{{app_name}}_base.html" {% templatetag closeblock %}
+{% templatetag openblock %} load i18n bootstrap_tags {% templatetag closeblock %}
+{% templatetag openblock %} load url from future {% templatetag closeblock %}
+{% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">{{app_name|make_humanized}}</a> <span class="divider">/</span></li>
+  <li class="active">{{model_name|make_humanized}}</li>
+</ul>
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block content {% templatetag closeblock %}
+<h3>List of {{ model_name }}</h3>
+<div class="">
+<form class="form-search pull-right" action="" method="GET">
+  <input name="q" id="id_q" type="text" class="input-medium search-query">
+  <button type="submit" class="btn btn-primary"><i class="icon-search"></i> Search</button>
+  <a href="{% templatetag openblock %} url '{{model_name}}-create' {% templatetag closeblock %}" class="btn btn-success"><i class="icon-plus"></i> Add</a>
+</form>
+<div class="clearfix"></div>
+</div>
+{% templatetag openblock %} if object_list {% templatetag closeblock %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for attr in attr_list %}
+            <th>
+                <a href="?sort=asc&sortby={{attr}}"><i class="icon-chevron-up"></i></a>            
+                {{ attr|make_humanized }}
+                <a href="?sort=desc&sortby={{attr}}"><i class="icon-chevron-down"></i></a>                
+            </th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% templatetag openblock %} for obj in object_list {% templatetag closeblock %}
+            <tr>
+                {% for attr in attr_list %}<td>{% templatetag openvariable %} obj.{{attr}} {% templatetag closevariable %}</td>
+                {% endfor %}
+                <td>
+<a href="{% templatetag openvariable %} obj.get_absolute_url {% templatetag closevariable %}" 
+    class=""><i class="icon-eye-open"></i> 
+        {% templatetag openblock %} trans "View" {% templatetag closeblock %}
+</a> &nbsp; 
+<a href="{% templatetag openvariable %} obj.get_update_url {% templatetag closevariable %}" 
+    class=""><i class="icon-pencil"></i> 
+        {% templatetag openblock %} trans "Update" {% templatetag closeblock %}
+</a> &nbsp; 
+<a href="{% templatetag openvariable %} obj.get_delete_url {% templatetag closevariable %}" 
+    class=""><i class="icon-trash"></i> 
+        {% templatetag openblock %} trans "Delete" {% templatetag closeblock %}
+</a>
+                </td>
+            </tr>                        
+        {% templatetag openblock %} endfor {% templatetag closeblock %}        
+    </tbody>
+</table>
+{% templatetag openblock %} else {% templatetag closeblock %}
+<div class="well">
+No object is found. Would you like to <a href="{% templatetag openblock %}url '{{model_name}}-create'{% templatetag closeblock %}">create</a> one???
+</div>
+{% templatetag openblock %} endif {% templatetag closeblock %}
+{% templatetag openblock %} endblock {% templatetag closeblock %}

@@ -1,0 +1,30 @@
+
+{% extends "organization/organization_base.html" %}
+{% load i18n bootstrap_tags %}
+{% load url from future %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>  
+  <li><a href="{%url 'organization-base'%}">Organization</a> <span class="divider">/</span></li>
+  <li><a href="{%url 'organization-list'%}">Organization</a> <span class="divider">/</span></li>
+  <li><a href="{{ object.get_absolute_url }}">
+  {{ object }}</a><span class="divider">/</span></li>
+  <li class="active">Delete</li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="well">
+<form action="" method="POST">{% csrf_token %}
+<p>
+Are you sure you want to delete the {{object}}?
+</p>
+<button type="submit" class="btn btn-danger">
+    <i class="icon-trash"></i> {% trans "Yes, I am sure!" %}
+</button>
+<a href="{{ object.get_list_url }}" 
+    class="btn btn-primary">
+        <i class="icon-chevron-left"></i> {% trans "No, Take me back!" %}
+</a>
+</form>
+</well>
+{% endblock %}

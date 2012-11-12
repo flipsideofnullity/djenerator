@@ -1,0 +1,6 @@
+class {{model}}Form(forms.ModelForm):
+    class Meta:
+        model = {{ model }}
+        exclude = [
+            "created_at", "modified_at", "created_by", 
+            "modified_by", "is_deleted", "is_active", "version",]

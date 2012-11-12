@@ -1,0 +1,2 @@
+<link type="text/css" href="{{STATIC_URL}}css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}bootstrap/bootstrap.css" rel="stylesheet">

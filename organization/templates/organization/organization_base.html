@@ -1,0 +1,42 @@
+{% extends "layouts/two_column.html" %}
+{% load i18n bootstrap_tags %}
+{% load url from future %}
+
+{% block sidebar %}
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Organizations
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <ul class="nav nav-list">
+            <li><a href="{% url 'organization-list' %}"><i class="icon-list"></i> List of organizations</a></li>
+            <li><a href="{% url 'organization-create' %}"><i class="icon-plus"></i> Create new organizations</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Departments
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <ul class="nav nav-list">
+            <li><a href="{% url 'department-list' %}"><i class="icon-list"></i> List of departments</a></li>
+            <li><a href="{% url 'department-create' %}"><i class="icon-plus"></i> Create new departments</a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
