@@ -10,8 +10,6 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^accounts/', include('userena.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^organization/', include('organization.urls')),
-    url(r'employee/', include('employee.urls')),
 )
 
 if settings.DEBUG:
