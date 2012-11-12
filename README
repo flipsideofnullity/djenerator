@@ -1,0 +1,24 @@
+This is a very basic and single-day-effort worth approach at taking a stab at CRUD based code generation in Django.
+
+It is a work in progress. I had created the "Djenerator" app and used it in a sample project, instead of separating the app and packaging it (which shall eventually be done), I just dumped the entire sample project here. Working with it is simple, really, although a bit naive at the moment. Here are the step:
+
+I. Download the ZIP, unzip and name it to djenerator_demo
+II. Create any app, inherit your models from "base.BaseModel", add an entry to the master urls.py
+III. Run "python manage.py djenerate <your-app-name>"
+IV. Enjoy the djenerated code, edit as necessary
+
+As mentioned earlier, this is a first stab at it. That's why it has zero configuration as of now. It uses bootstrap for layout and userena for account management. If you checkout the templates at djenerator/templates then you can easily change in accordance to your taste. BaseModel too can be changed or models.Model can also be used, but as of now, be sure to change the djenerator templates.
+
+There are lots of TODOs:
+
+1. If you re-djenerate an app or accidentally djenerate something AFTER you have edited it, there should be a way to save your previous work in a separate folder to recover it and a WARNING message on duplicated
+2. Creating a configuration file that will control what attributes go to the list or detail view, how forms are shown etc.
+3. A command that will create View class, url entry, and other basics such as Template, JSON response etc.
+    Crude Example:
+        python manage.py djenerate_view "app-name" "view-name" "json|template" "template-file"
+    The command above should create a "view" on the app, add an entry in the url, create template file if needed, or just send out json/xml etc responses
+4. Many Other TODOs on demand
+...
+400. Refactoring the codebase to a more friendly format
+
+
