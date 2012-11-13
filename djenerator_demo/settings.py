@@ -156,8 +156,6 @@ INSTALLED_APPS = (
     'coffeescript',
     'djenerator',
     'django_evolution',
-    'organization',
-    'employee',
 )
 
 # A sample logging configuration. The only tangible logging
